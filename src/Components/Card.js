@@ -8,11 +8,12 @@ const StyledCard = styled.div`
   ${props => props.container && `padding: 2px 16px;`}
 `;
 
-function Card() {
+function Card({ ele }) {
   return (
     <StyledCard container>
       <h4>
         <b>John Doe</b>
+        ele.node.name
       </h4>
       <p>Architect & Engineer</p>
     </StyledCard>

@@ -6,15 +6,20 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
   }
-
   async componentDidMount() {
+    // For this block I am going to implement : validare token
     let res;
     try {
       res =
-        window.location.href.split("?code=").length === 2 &&
-        (await getAuthToken(window.location.href.split("?code=")[1]));
-      localStorage.setItem("token", res.access_token);
-      window.location.href = "/";
+        window.location.href.split("?code=").length === 2
+          ? await getAuthToken(window.location.href.split("?code=")[1])
+          : undefined;
+      console.log("res", res);
+      if (res && res.access_token) {
+        localStorage.setItem("token", res && res.access_token);
+        console.log(res.access_token);
+        window.location.href = window.location.href.split("/login")[0];
+      }
     } catch (error) {
       alert(error);
     }

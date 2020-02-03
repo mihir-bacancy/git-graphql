@@ -27,7 +27,7 @@ class App extends React.Component {
       <React.Fragment>
         <GlobalStyle />
         <AppContainer>
-          <Header />
+          <Header {...this.props} />
           To get started, edit <code>src/App.js</code> and save to reload.
           <Routes />
           {/* <Card /> */}

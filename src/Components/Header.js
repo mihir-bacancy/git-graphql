@@ -24,13 +24,22 @@ const AppLogo = styled.img`
   justify-content: center;
 `;
 
-function Header() {
+function Header(props) {
+  console.log("props", props);
   return (
     <AppHeader>
       <Content>
         <AppLogo src={logo} alt="logo" />
         <AppTitle>GIT GRAPH</AppTitle>
         <Search />
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.reload();
+          }}
+        >
+          Logout
+        </button>
       </Content>
     </AppHeader>
   );
