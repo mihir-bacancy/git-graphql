@@ -1,4 +1,4 @@
-import { client_id, client_secret } from "../config";
+import { client_id, client_secret } from "../utils/config";
 import { gql } from "apollo-boost";
 import { client } from "./apollo";
 

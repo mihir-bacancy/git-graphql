@@ -1,10 +1,10 @@
 import { getRepository, searchRepository } from "../../services/git";
-
+import { STAR_REPO } from "../../utils/constant";
 export const getRepositories = async dispatch => {
   try {
     const repos = await getRepository();
     dispatch({
-      type: "STAR_REPO",
+      type: STAR_REPO,
       payload: repos.data.viewer.starredRepositories.edges
     });
   } catch (error) {

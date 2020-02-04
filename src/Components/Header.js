@@ -61,7 +61,7 @@ function Header(props) {
           <AppTitle>GIT GRAPH</AppTitle>
         </div>
         <SearchWrapper>
-          <Search />
+          {localStorage.getItem("token") && <Search />}
           <div>
             {localStorage.getItem("token") && (
               <Button

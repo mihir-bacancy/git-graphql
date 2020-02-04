@@ -1,6 +1,7 @@
 import React from "react";
-import { client_id, redirect_uri } from "../config";
+import { client_id, redirect_uri } from "../utils/config";
 import { getAuthToken } from "../services/git";
+import styled from "styled-components";
 
 class Login extends React.Component {
   async componentDidMount() {
@@ -23,16 +24,23 @@ class Login extends React.Component {
   }
 
   render() {
+    const Button = styled.button`
+      border-radius: 5px;
+      margin-top: 4px;
+      padding: 8px;
+      border-color: black;
+      background-color: white;
+    `;
     return (
       <div className="AuthWrapper">
-        <button type="button" className="btn btn-dark btn-git">
+        <Button>
           <a
             className="AuthLink"
             href={`https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=user,repo,public_repo`}
           >
             SignIn with github
           </a>
-        </button>
+        </Button>
       </div>
     );
   }
