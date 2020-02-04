@@ -1,6 +1,6 @@
 import { client_id, client_secret } from "../config";
-// import { gql } from "apollo-boost";
-// import { client } from "./apollo";
+import { gql } from "apollo-boost";
+import { client } from "./apollo";
 
 export const getAuthToken = code => {
   console.log("called");
@@ -16,35 +16,35 @@ export const getAuthToken = code => {
 };
 
 // Get All the repository
-// export const getRepository = () => {
-//   const REPO_LIST = gql`
-//     query {
-//       viewer {
-//         login
-//         name
-//         starredRepositories(first: 20) {
-//           edges {
-//             cursor
-//             node {
-//               id
-//               name
-//               description
-//               primaryLanguage {
-//                 id
-//                 name
-//                 color
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `;
-//   return client.query({
-//     query: REPO_LIST,
-//     fetchPolicy: "no-cache"
-//   });
-// };
+export const getRepository = () => {
+  const REPO_LIST = gql`
+    query {
+      viewer {
+        login
+        name
+        starredRepositories(first: 20) {
+          edges {
+            cursor
+            node {
+              id
+              name
+              description
+              primaryLanguage {
+                id
+                name
+                color
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  return client.query({
+    query: REPO_LIST,
+    fetchPolicy: "no-cache"
+  });
+};
 
 // // Search results
 // export const searchRepositories = variables => {
@@ -70,3 +70,21 @@ export const getAuthToken = code => {
 //     variables
 //   });
 // };
+
+// queryFunction to unstar git repository
+export const unstar = variables => {
+  const REMOVE_STAR = gql`
+    mutation($id: String!) {
+      removeStar(input: { starrableId: $id }) {
+        starrable {
+          id
+        }
+      }
+    }
+  `;
+
+  return client.mutate({
+    mutation: REMOVE_STAR,
+    variables
+  });
+};

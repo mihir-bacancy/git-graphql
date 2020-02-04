@@ -2,7 +2,8 @@ import React from "react";
 // import "./App.css";
 import Header from "./Components/Header";
 import styled, { createGlobalStyle } from "styled-components";
-import Card from "./Components/Card";
+import Provider from "./Context";
+
 import Routes from "./routes";
 const AppContainer = styled.div`
   text-align: center;
@@ -29,7 +30,9 @@ class App extends React.Component {
         <AppContainer>
           <Header {...this.props} />
           To get started, edit <code>src/App.js</code> and save to reload.
-          <Routes />
+          <Provider>
+            <Routes />
+          </Provider>
           {/* <Card /> */}
         </AppContainer>
       </React.Fragment>
