@@ -1,12 +1,13 @@
-let state = {
-  starRepos: []
-};
-
-export default (state, action) => {
+export default (
+  state = {
+    starRepos: []
+  },
+  action
+) => {
   switch (action.type) {
-    case "START_REPO":
+    case "STAR_REPO":
       console.log("action", action);
-      return (state = { ...state, state, starRepos: action.payload });
+      return { ...state, starRepos: action.payload };
     default:
       return state;
   }

@@ -1,14 +1,21 @@
-import { getRepository } from "../../services/git";
+import { getRepository, searchRepository } from "../../services/git";
 
 export const getRepositories = async dispatch => {
-  let repos;
   try {
-    repos = await getRepository();
-    console.log("repos", dispatch);
+    const repos = await getRepository();
     dispatch({
-      type: "START_REPO",
+      type: "STAR_REPO",
       payload: repos.data.viewer.starredRepositories.edges
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchRepositories = async query => {
+  try {
+    const res = await searchRepository(query);
+    return res?.data?.search?.nodes;
   } catch (error) {
     console.log(error);
   }

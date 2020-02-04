@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { client_id, redirect_uri } from "../config";
 import { getAuthToken } from "../services/git";
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   async componentDidMount() {
     // For this block I am going to implement : validare token
     let res;

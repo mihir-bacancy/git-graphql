@@ -8,10 +8,19 @@ import {
 import Login from "./Components/Login";
 import Home from "./Components/Home";
 
+function Routes() {
+  return (
+    <Router>
+      <Switch>
+        <CustomLoginRoute exact path="/login" component={Login} />
+        <PrivateRoute exact path="/" component={Home} />
+      </Switch>
+    </Router>
+  );
+}
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
-    // Show the component only when the user is logged in
-    // Otherwise, redirect the user to /signin page
     <Route
       {...rest}
       render={props =>
@@ -25,15 +34,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-function Routes() {
+const CustomLoginRoute = ({ component: Component, ...rest }) => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/" component={Home} />
-      </Switch>
-    </Router>
+    <Route
+      {...rest}
+      render={props =>
+        localStorage.getItem("token") ? (
+          <Redirect to="/" />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
   );
-}
+};
 
 export default Routes;

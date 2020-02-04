@@ -46,30 +46,30 @@ export const getRepository = () => {
   });
 };
 
-// // Search results
-// export const searchRepositories = variables => {
-//   const SEARCH_REPO = gql`
-//     query topRepos($query: String!) {
-//       search(first: 10, query: $query, type: REPOSITORY) {
-//         repositoryCount
-//         nodes {
-//           ... on Repository {
-//             name
-//             id
-//             nameWithOwner
-//             stargazers {
-//               totalCount
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `;
-//   return client.query({
-//     query: SEARCH_REPO,
-//     variables
-//   });
-// };
+// Search results
+export const searchRepository = variables => {
+  const SEARCH_REPO = gql`
+    query topRepos($query: String!) {
+      search(first: 10, query: $query, type: REPOSITORY) {
+        repositoryCount
+        nodes {
+          ... on Repository {
+            name
+            id
+            nameWithOwner
+            stargazers {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  `;
+  return client.query({
+    query: SEARCH_REPO,
+    variables
+  });
+};
 
 // queryFunction to unstar git repository
 export const unstar = variables => {
@@ -85,6 +85,24 @@ export const unstar = variables => {
 
   return client.mutate({
     mutation: REMOVE_STAR,
+    variables
+  });
+};
+
+// queryFunction to star git repository
+export const star = variables => {
+  const ADD_STAR = gql`
+    mutation($id: String!) {
+      addStar(input: { starrableId: $id }) {
+        starrable {
+          id
+        }
+      }
+    }
+  `;
+
+  return client.mutate({
+    mutation: ADD_STAR,
     variables
   });
 };
