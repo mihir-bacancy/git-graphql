@@ -12,6 +12,7 @@
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
     "dotenv": "^8.2.0",
+    "eslint-config-react-app": "^5.2.0",
     "graphql": "^14.6.0",
     "lodash.get": "^4.4.2",
     "react": "^16.12.0",
@@ -22,10 +23,11 @@
     "styled-components": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run eslint-check && react-scripts start",
+    "build": "npm run eslint && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint-check": "eslint ./src/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +43,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
+    "prettier": "^1.19.1"
   }
 }
